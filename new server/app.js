@@ -1,15 +1,19 @@
 //קובץ האפליקציה הראשי
 const express = require("express");
 const morgan = require("./logger/logger");
+const cors = require("cors");
 //ייבוא הראוטרים
 const { routerProducts, routerUsers } = require("./router/router");
 //יבוא הסרביסר שקורא משרת חיצוני
-const productServices = require("C:/Users/User/Documents/new server/Product/servicesProduct.js");
+const productServices = require("./Product/servicesProduct");
 //הפעלת אקספרס
 const app = express();
 //נתינת יכולת לשרת לקרוא קבצי טקסט וג'ייסון
 app.use(express.json());
 app.use(express.text());
+cors({ origin: "http//localhost:3000", optionsSuccessStatus: 200 });
+app.use(cors);
+
 //מידל-וורס שיפעילו את הנתבים
 app.use("/product", routerProducts);
 app.use("/users", routerUsers);

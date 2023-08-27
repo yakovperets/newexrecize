@@ -1,4 +1,6 @@
 const userService = require("./servicesUsers");
+const errors = require("../errorhandler");
+
 //כניסת משתמש חדש
 const addUser = async (req, res) => {
   try {
@@ -6,7 +8,7 @@ const addUser = async (req, res) => {
     await userService.addUser(newUser);
     res.send("your request complete!");
   } catch (error) {
-    handelError(res, 500, error.message);
+    errors.handelError(res, 500, error.message);
   }
 };
 //כניסת משתמש קיים
@@ -16,7 +18,7 @@ const getUserId = async (req, res) => {
     const isExist = await userService.getUserId(id);
     res.send(isExist);
   } catch (error) {
-    handelError(res, 500, error.message);
+    errors.handelError(res, 500, error.message);
   }
 };
 module.exports = { addUser, getUserId };
